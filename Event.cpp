@@ -1,0 +1,185 @@
+#include "Event.h"
+#include <cstring>
+#include "Hall.h"
+#include <iostream>
+
+
+
+Event::Event(Date _date, Hall _hall, std::string _name)
+	: date(_date)
+	, hall(_hall)
+	, name(_name)
+	,soldSeats(0)
+	,freeSeats(hall.getAllSeats())
+{
+	note.resize(hall.getRows());
+	for (int i = 0; i < hall.getRows(); i++)
+	{
+		note[i].resize(hall.getSeatsOnRow());
+	}
+
+	for (int i = 0; i < hall.getRows(); i++)
+	{
+		for (int j = 0; j < hall.getSeatsOnRow(); j++)
+		{
+			note[i][j].push_back('-');
+		}
+	}
+
+	ticketid.resize(hall.getRows());
+	for (int i = 0; i < hall.getRows(); i++)
+	{
+		ticketid[i].resize(hall.getSeatsOnRow());
+	}
+
+	for (int i = 0; i < hall.getRows(); i++)
+	{
+		for (int j = 0; j < hall.getSeatsOnRow(); j++)
+		{
+			ticketid[i][j].push_back('-');
+		}
+	}
+
+	seats.resize(hall.getRows());
+	for (int i = 0; i < hall.getRows(); i++)
+	{
+		seats[i].resize(hall.getSeatsOnRow());
+	}
+
+	for (int i = 0; i < hall.getRows(); i++)
+	{
+		for (int j = 0; j < hall.getSeatsOnRow(); j++)
+		{
+			seats[i][j] = def;
+		}
+	}
+
+}
+
+Event& Event::operator=(const Event& other)
+{
+	// TODO: insert return statement here
+	if (this != &other)
+	{
+		copy(other);
+	}
+
+	return *this;
+}
+
+Event::~Event()
+{
+}
+
+void Event::setId(int row, int seat)
+{
+}
+
+void Event::bookSeat(int row, int seat)
+{
+	if (seats[row - 1][seat - 1] == booked)
+	{
+		std::cout << "Seat is reserved." << std::endl;
+	}
+	else if (seats[row - 1][seat - 1] == paid)
+	{
+		std::cout << "Seat is bought." << std::endl;
+	}
+	else
+	{
+		seats[row - 1][seat - 1] = booked;
+		freeSeats--;
+	}
+}
+
+void Event::unbookSeat(int row, int seat)
+{
+	if (seats[row - 1][seat - 1] == booked)
+	{
+		seats[row - 1][seat - 1] = def;
+		freeSeats++;
+	}
+}
+
+void Event::buySeat(int row, int seat)
+{
+	if (seats[row - 1][seat - 1] == booked)
+	{
+		std::cout << "Seat is reserved." << std::endl;
+	}
+	else if (seats[row - 1][seat - 1] == paid)
+	{
+		std::cout << "Seat is paid." << std::endl;
+	}
+	else
+	{
+		seats[row - 1][seat - 1] = paid;
+		freeSeats--;
+		soldSeats++;
+	}
+}
+
+void Event::print() const
+{
+	std::cout << "Event: " << name << "on date: "
+		<< date << " in hall: " << hall.getId() << std::endl;
+}
+
+void Event::printSeatStatus() const
+{
+	for (int i = 0; i < hall.getRows(); i++)
+	{
+		for (int j = 0; j < hall.getSeatsOnRow(); j++)
+		{
+			if (seats[i - 1][j - 1] == def)
+			{
+				std::cout << "Row " << i << "seat " << j << " is free." << std::endl;
+			}
+			else if (seats[i - 1][j - 1] == booked)
+			{
+				std::cout << "Row " << i << "seat " << j << " is reserved." << std::endl;
+			}
+			else if (seats[i - 1][j - 1] == paid)
+			{
+				std::cout << "Row " << i << "seat " << j << " is already paid." << std::endl;
+			}
+		}
+	}
+}
+
+void Event::printBooked() const
+{
+	for (int i = 0; i < hall.getRows(); i++)
+	{
+		for (int j = 0; j < hall.getSeatsOnRow(); j++)
+		{
+			if (seats[i][j] == booked)
+			{
+				std::cout << "Row " << i << "seat " << j << std::endl;
+			}
+		}
+	}
+}
+
+void Event::copy(const Event& other)
+{
+	this->name = other.name;
+	this->date = other.date;
+	this->hall = other.hall;
+	this->freeSeats = other.freeSeats;
+	this->soldSeats = other.soldSeats;
+	this->ticketid = other.ticketid;
+	this->note = other.note;
+	this->seats = other.seats;
+}
+
+void Event::clear()
+{
+
+}
+
+
+
+
+
+
