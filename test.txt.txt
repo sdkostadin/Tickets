@@ -1,0 +1,12 @@
+Add event: Event date: 25.12.2020 in hall 3 with name Lqtna nosht $
+Add event: Event date: 13.11.2020 in hall 1 with name Ivan i tigara $
+Add event: Event date: 06.10.2020 in hall 4 with name Kon vadi rqpa $
+Add event: Event date: 11.03.2020 in hall 2 with name Ala bala $
+Add event: Event date: 18.07.2020 in hall 5 with name Hitler $
+Add event: Event date: 19.06.2020 in hall 1 with name Stalin $
+Add event: Event date: 22.09.2020 in hall 3 with name Kichenica $
+Add event: Event date: 25.10.2020 in hall 4 with name Baba Meca $
+Add event: Event date: 31.03.2020 in hall 5 with name Dai boje tri $
+Add event: Event date: 14.01.2020 in hall 1 with name Izcherpah se $
+Add event: Event date: 27.04.2020 in hall 2 with name Pochti uspqh $
+Add event: Event date: 21.12.2020 in hall 2 with name Yess @

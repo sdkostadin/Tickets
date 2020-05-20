@@ -1,24 +1,45 @@
 #include "WorkFile.h"
 #include <iostream>
 
-WorkFile::WorkFile()
+
+void WorkFile::_open(std::string path)
 {
+	file.open(path);
+	if (file.is_open())
+	{
+		std::cout << "File successfully opened.";
+		std::ifstream ReadFile(path);
+		getline(ReadFile, content, '@');
+	}
+	else
+	{
+		std::cout << "File unsuccessfully opened!";
+	}
 
 }
 
-void WorkFile::open()
+void WorkFile::_close()
+{
+	if (file.is_open())
+	{
+		file.close();
+		std::cout << "Succesfully closed " << fileName << std::endl;
+	}
+	else
+	{
+		std::cout << "File not opened!" << std::endl;
+	}
+}
+
+void WorkFile::_save()
 {
 }
 
-void WorkFile::save()
+void WorkFile::_saveas(std::string place)
 {
 }
 
-void WorkFile::save_as()
-{
-}
-
-void WorkFile::help()
+void WorkFile::_help()
 {
 	std::cout
 		<< "The following commands are supported: "<<std::endl
@@ -31,6 +52,12 @@ void WorkFile::help()
 		
 }
 
-void WorkFile::exit()
+void WorkFile::_exit()
 {
+	if (file.is_open())
+	{
+		file.close();
+	}
+	std::cout << "Ending program!" << std::endl;
+	return;
 }
