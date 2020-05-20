@@ -1,5 +1,4 @@
 #pragma once
-#include <ctime>
 #include <vector>
 #include <string>
 #include "Hall.h"
@@ -33,13 +32,13 @@ public:
 	std::string getTicketId(int row, int seat) const { return ticketid[row - 1][seat - 1]; }
 	std::string getNote(int row, int seat) const { return note[row - 1][seat - 1]; }
 	void setId(int row, int seat);
-	void bookSeat(int row, int seat);
-	void unbookSeat(int row, int seat);
-	void buySeat(int row, int seat);
+	bool bookSeat(int row, int seat, std::string _note);
+	bool unbookSeat(int row, int seat);
+	bool isBooked(int row, int seat);
+	bool buySeat(int row, int seat, std::string _note);
 	void print() const;
 	void printSeatStatus() const;
 	void printBooked() const;
-	
 
 private:
 
@@ -51,8 +50,6 @@ private:
 	std::vector<std::vector<std::string>> note;
 	std::vector<std::vector<std::string>> ticketid;
 	std::vector<std::vector<status>> seats;
-	
-
 	
 	
 	void copy(const Event& other);

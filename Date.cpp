@@ -197,7 +197,7 @@ bool Date::operator>=(const Date& other) const
 	return !(*this < other);
 }
 
-void Date::print()
+void Date::print() const
 {
 	std::cout << _day << '.' << _month << '.' << _year;
 }

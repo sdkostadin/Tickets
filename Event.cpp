@@ -12,47 +12,29 @@ Event::Event(Date _date, Hall _hall, std::string _name)
 	,soldSeats(0)
 	,freeSeats(hall.getAllSeats())
 {
-	note.resize(hall.getRows());
-	for (int i = 0; i < hall.getRows(); i++)
+	note.resize(200);
+	for (int i = 0; i < 200; i++)
 	{
-		note[i].resize(hall.getSeatsOnRow());
+		note[i].resize(200);
+	}
+	
+	
+
+	ticketid.resize(200);
+	for (int i = 0; i < 200; i++)
+	{
+		ticketid[i].resize(200);
 	}
 
-	for (int i = 0; i < hall.getRows(); i++)
+	
+
+	seats.resize(200);
+	for (int i = 0; i < 200; i++)
 	{
-		for (int j = 0; j < hall.getSeatsOnRow(); j++)
-		{
-			note[i][j].push_back('-');
-		}
+		seats[i].resize(200);
 	}
 
-	ticketid.resize(hall.getRows());
-	for (int i = 0; i < hall.getRows(); i++)
-	{
-		ticketid[i].resize(hall.getSeatsOnRow());
-	}
 
-	for (int i = 0; i < hall.getRows(); i++)
-	{
-		for (int j = 0; j < hall.getSeatsOnRow(); j++)
-		{
-			ticketid[i][j].push_back('-');
-		}
-	}
-
-	seats.resize(hall.getRows());
-	for (int i = 0; i < hall.getRows(); i++)
-	{
-		seats[i].resize(hall.getSeatsOnRow());
-	}
-
-	for (int i = 0; i < hall.getRows(); i++)
-	{
-		for (int j = 0; j < hall.getSeatsOnRow(); j++)
-		{
-			seats[i][j] = def;
-		}
-	}
 
 }
 
@@ -73,75 +55,121 @@ Event::~Event()
 
 void Event::setId(int row, int seat)
 {
+	ticketid[row - 1][seat - 1] = std::to_string(row) + "/" + std::to_string(seat) + "/" + std::to_string(hall.getId())
+		+ "/" + std::to_string(date.getDay()) + "/" + std::to_string(date.getMonth()) + "/" + std::to_string(date.getYear());
 }
 
-void Event::bookSeat(int row, int seat)
+bool Event::bookSeat(int row, int seat, std::string _note)
 {
 	if (seats[row - 1][seat - 1] == booked)
 	{
-		std::cout << "Seat is reserved." << std::endl;
+		std::cout << "Seat is aldready booked." << std::endl;
+		return false;
 	}
 	else if (seats[row - 1][seat - 1] == paid)
 	{
-		std::cout << "Seat is bought." << std::endl;
+		
+		std::cout << "Seat is already bought." << std::endl;
+		return false;
 	}
 	else
 	{
 		seats[row - 1][seat - 1] = booked;
-		freeSeats--;
+		note[row - 1][seat - 1] = _note;
+		setId(row, seat);
+		std::cout << "Seat booked succesfuly.";
+		return true;
 	}
+	
 }
 
-void Event::unbookSeat(int row, int seat)
+bool Event::unbookSeat(int row, int seat)
 {
 	if (seats[row - 1][seat - 1] == booked)
 	{
 		seats[row - 1][seat - 1] = def;
 		freeSeats++;
+		std::cout << "Seat unbooked succesfuly.";
+		return true;
+	}
+	else
+	{
+		std::cout << "Seat is not booked!";
+		return false;
 	}
 }
 
-void Event::buySeat(int row, int seat)
+bool Event::isBooked(int row, int seat)
 {
 	if (seats[row - 1][seat - 1] == booked)
 	{
-		std::cout << "Seat is reserved." << std::endl;
+		return true;
+	}
+	else
+	{
+		return false;
+	}
+}
+
+bool Event::buySeat(int row, int seat, std::string _note)
+{
+	if (seats[row - 1][seat - 1] == booked)
+	{
+		if (note[row - 1][seat - 1] == _note)
+		{
+			freeSeats--;
+			soldSeats++;
+			seats[row - 1][seat - 1] = paid;
+			std::cout << "Seat bought succesfuly.";
+			return true;
+		}
+		else
+		{
+			std::cout << "Seat is reserved." << std::endl;
+			return false;
+		}
 	}
 	else if (seats[row - 1][seat - 1] == paid)
 	{
 		std::cout << "Seat is paid." << std::endl;
+		return false;
 	}
 	else
 	{
 		seats[row - 1][seat - 1] = paid;
+		note[row - 1][seat - 1] = _note;
 		freeSeats--;
 		soldSeats++;
+		setId(row, seat);
+		return true;
 	}
+	
 }
 
 void Event::print() const
 {
-	std::cout << "Event: " << name << "on date: "
-		<< date << " in hall: " << hall.getId() << std::endl;
+	std::cout << "Event: " << name << " on date: ";
+	std::cout<< date.getDay()<<"."<< date.getMonth() << "." <<date.getYear();
+	std::cout<< " in hall: " << hall.getId() << std::endl;
 }
 
 void Event::printSeatStatus() const
 {
-	for (int i = 0; i < hall.getRows(); i++)
+	for (int i = 0; i < 100; i++)
 	{
-		for (int j = 0; j < hall.getSeatsOnRow(); j++)
+		for (int j = 0; j < 100; j++)
 		{
 			if (seats[i - 1][j - 1] == def)
 			{
-				std::cout << "Row " << i << "seat " << j << " is free." << std::endl;
+				std::cout << "Row " << i << " seat " << j << " is free." << std::endl;
 			}
 			else if (seats[i - 1][j - 1] == booked)
 			{
-				std::cout << "Row " << i << "seat " << j << " is reserved." << std::endl;
+				std::cout << "Row " << i << " seat " << j << " is reserved." << std::endl;
 			}
 			else if (seats[i - 1][j - 1] == paid)
 			{
-				std::cout << "Row " << i << "seat " << j << " is already paid." << std::endl;
+				std::cout << "Row " << i << " seat " << j << " is already paid." << std::endl;
 			}
 		}
 	}
@@ -149,13 +177,13 @@ void Event::printSeatStatus() const
 
 void Event::printBooked() const
 {
-	for (int i = 0; i < hall.getRows(); i++)
+	for (int i = 0; i < 100; i++)
 	{
-		for (int j = 0; j < hall.getSeatsOnRow(); j++)
+		for (int j = 0; j < 100; j++)
 		{
 			if (seats[i][j] == booked)
 			{
-				std::cout << "Row " << i << "seat " << j << std::endl;
+				std::cout << "Row " << i+1 << " seat " << j+1 << std::endl;
 			}
 		}
 	}
