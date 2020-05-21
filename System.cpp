@@ -51,8 +51,9 @@ void System::freeSeats(const Date& date, std::string name)
 		if (events[i]->getDate() == date && events[i]->getName() == name)
 		{
 			events[i]->print();
-			events[i]->printSeatStatus();
 			std::cout << "Free Seats are: " << events[i]->getFreeSeats() << std::endl;
+			events[i]->printFree();
+			
 		}
 	}
 }
@@ -111,6 +112,11 @@ bool System::check(std::string _ticketid)
 						" on date " << events[i]->getDate() << " on row " << j + 1 << " seat " << k + 1;
 					return true;
 				}
+				else
+				{
+					std::cout << "Invalid ID!";
+					return false;
+				}
 			}
 		}
 	}
@@ -126,6 +132,8 @@ void System::report(const Date& from, const Date& to, int Id)
 			&& events[i]->getHall().getId() == Id)
 		{
 			events[i]->print();
+			std::cout << "Bought tickets: " << events[i]->getSoldSeats()<<std::endl;
+			events[i]->printBought();
 		}
 	}
 
@@ -138,6 +146,8 @@ void System::report(const Date& from, const Date& to)
 		if (events[i]->getDate() >= from && events[i]->getDate() <= to)
 		{
 			events[i]->print();
+			std::cout << "Bought tickets: " << events[i]->getSoldSeats() << std::endl;
+			events[i]->printBought();
 		}
 	}
 
@@ -183,13 +193,30 @@ void System::tenPercent(const Date& from, const Date& to) const
 {
 	for (size_t i = 0; i < events.size(); i++)
 	{
-		if (events[i]->getDate() >= from && events[i]->getDate() <= to
-			&& (double)events[i]->getHall().getAllSeats()/ events[i]->getSoldSeats()<10)
+		if (events[i]->getDate() >= from && events[i]->getDate() <= to)
 		{
-			events[i]->print();
+			double helper = events[i]->getSoldSeats()/ events[i]->getHall().getAllSeats() ;
+			if (helper < 0.1 || events[i]->getSoldSeats()==0)
+			{
+				events[i]->print();
+				std::cout << "Bought tickets: " << events[i]->getSoldSeats()<<std::endl;
+			}
 		}
 	}
 }
+
+bool System::SortEvents()
+{
+	std::sort(events.begin(), events.end(),
+		[](Event* a, Event* b) { return a->getSoldSeats() > b->getSoldSeats(); });
+	for (size_t i = 0; i < events.size(); i++)
+	{
+		events[i]->print();
+		std::cout << events[i]->getSoldSeats() << " bought  tickets " << std::endl;
+	}
+}
+
+
 
 bool System::isBooked2(int row, int seat, const Date& date, std::string name)
 {
@@ -225,7 +252,7 @@ void System::run()
 	int day, month, year;
 	int row, seat;
 	std::string command;
-	
+	WorkFile work;
 
 	do
 	{
@@ -242,10 +269,17 @@ void System::run()
 			std::cin.get();
 			std::cin >> year >> id >> name;
 			date.setDay(day);
-			date.setDay(month);
-			date.setDay(year);
-			createEvent({ date , id, name });
-			std::cout << std::endl;
+			date.setMonth(month);
+			date.setYear(year);
+			for (size_t i = 0; i < halls.size(); i++)
+			{
+				if (halls[i].getId() == id)
+				{
+					Event ev (date, halls[i], name);
+					createEvent({ ev });
+					std::cout << std::endl;
+				}
+			}
 			
 
 		}
@@ -258,8 +292,8 @@ void System::run()
 			std::cin.get();
 			std::cin >> year >> name >> note;
 			date.setDay(day);
-			date.setDay(month);
-			date.setDay(year);
+			date.setMonth(month);
+			date.setYear(year);
 			book(row, seat, date, name, note);
 			std::cout << std::endl;
 			
@@ -274,8 +308,8 @@ void System::run()
 			std::cin.get();
 			std::cin >> year >> name;
 			date.setDay(day);
-			date.setDay(month);
-			date.setDay(year);
+			date.setMonth(month);
+			date.setYear(year);
 			unbook(row, seat, date, name);
 			std::cout << std::endl;
 			
@@ -289,8 +323,8 @@ void System::run()
 			std::cin.get();
 			std::cin >> year >> name;
 			date.setDay(day);
-			date.setDay(month);
-			date.setDay(year);
+			date.setMonth(month);
+			date.setYear(year);
 			if (isBooked2(row, seat, date, name))
 			{
 				std::cin >> note;
@@ -324,8 +358,8 @@ void System::run()
 				std::cin >> year;
 				std::cin>> name;
 				date.setDay(day);
-				date.setDay(month);
-				date.setDay(year);
+				date.setMonth(month);
+				date.setYear(year);
 				bookings(name, date);
 			}
 			else if (d == 'Y' && n == 'N')
@@ -337,8 +371,8 @@ void System::run()
 				std::cin >> year;
 				
 				date.setDay(day);
-				date.setDay(month);
-				date.setDay(year);
+				date.setMonth(month);
+				date.setYear(year);
 				bookings(date);
 			}
 			else if(d == 'N' && n == 'Y')
@@ -354,7 +388,7 @@ void System::run()
 		else if (command == "check")
 		{
 		std::string ticketid;
-		getline(std::cin, ticketid);
+		std::cin >> ticketid;
 		check(ticketid);
 		}
 		else if (command == "freeseats")
@@ -367,8 +401,8 @@ void System::run()
 		std::cin >> year;
 		std::cin >> name;;
 		date.setDay(day);
-		date.setDay(month);
-		date.setDay(year);
+		date.setMonth(month);
+		date.setYear(year);
 		freeSeats(date,name);
 		}
 		else if (command == "report")
@@ -388,16 +422,16 @@ void System::run()
 				std::cin.get();
 				std::cin >> year1;
 				from.setDay(day1);
-				from.setDay(month1);
-				from.setDay(year1);
+				from.setMonth(month1);
+				from.setYear(year1);
 				std::cin >> day2;
 				std::cin.get();
 				std::cin >> month2;
 				std::cin.get();
 				std::cin >> year2;
 				to.setDay(day2);
-				to.setDay(month2);
-				to.setDay(year2);
+				to.setMonth(month2);
+				to.setYear(year2);
 				std::cin >> ID;
 				report(from, to, ID);
 			}
@@ -409,21 +443,70 @@ void System::run()
 				std::cin.get();
 				std::cin >> year1;
 				from.setDay(day1);
-				from.setDay(month1);
-				from.setDay(year1);
+				from.setMonth(month1);
+				from.setYear(year1);
 				std::cin >> day2;
 				std::cin.get();
 				std::cin >> month2;
 				std::cin.get();
 				std::cin >> year2;
 				to.setDay(day2);
-				to.setDay(month2);
-				to.setDay(year2);
+				to.setMonth(month2);
+				to.setYear(year2);
 				report(from, to);
 			}
 		}
+		else if (command == "underten")
+		{
+		Date from;
+		Date to;
+		int day1, month1, year1, day2, month2, year2;
+		std::cin >> day1;
+		std::cin.get();
+		std::cin >> month1;
+		std::cin.get();
+		std::cin >> year1;
+		from.setDay(day1);
+		from.setMonth(month1);
+		from.setYear(year1);
+		std::cin >> day2;
+		std::cin.get();
+		std::cin >> month2;
+		std::cin.get();
+		std::cin >> year2;
+		to.setDay(day2);
+		to.setMonth(month2);
+		to.setYear(year2);
+		tenPercent(from, to);
+		}
+		else if (command == "popular")
+		{
+		SortEvents();
+		}
+		else if (command == "open")
+		{
+		
+		}
+		else if (command == "close")
+		{
+
+		}
+		else if (command == "save")
+		{
+
+		}
+		else if (command == "saveas")
+		{
+
+		}
+		else if (command == "help")
+		{
+		 work._help();
+		}
+	
 	}
 		while (command != "exit");
+		work._exit();
 	
 }
 

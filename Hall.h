@@ -12,6 +12,7 @@ public:
 	int getSeatsOnRow() const { return SeatsOnRow ; }
 	int getAllSeats() const { return rows * SeatsOnRow; }
 	
+	void setId(int _id) { id = _id; };
 	
 
 private:

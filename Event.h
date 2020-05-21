@@ -29,16 +29,19 @@ public:
 	int getFreeSeats() const { return freeSeats; }
 	int getSoldSeats() const { return soldSeats; }
 	status getSeatStatus(int row, int seat) const { return seats[row-1][seat-1]; }
-	std::string getTicketId(int row, int seat) const { return ticketid[row - 1][seat - 1]; }
+	std::string getTicketId(int row, int seat) const { return ticketid[row][seat]; }
 	std::string getNote(int row, int seat) const { return note[row - 1][seat - 1]; }
+	void setName(std::string _name);
 	void setId(int row, int seat);
+	void setDate(Date _date);
 	bool bookSeat(int row, int seat, std::string _note);
 	bool unbookSeat(int row, int seat);
 	bool isBooked(int row, int seat);
 	bool buySeat(int row, int seat, std::string _note);
 	void print() const;
-	void printSeatStatus() const;
+	void printFree() const;
 	void printBooked() const;
+	void printBought() const;
 
 private:
 

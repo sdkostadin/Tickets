@@ -2,6 +2,7 @@
 #include <vector>
 #include <iostream>
 #include <sstream>
+#include <algorithm>
 #include "Event.h"
 #include "WorkFile.h"
  
@@ -9,8 +10,8 @@ class System
 {
 public:
 	System() = default;
-	System(const System& other) = delete;
-	System& operator=(const System& other) = delete;
+	System(const System& other) = default;
+	System& operator=(const System& other) = default;
 	~System();
 	
 	bool createEvent(const Event& event);
@@ -26,6 +27,7 @@ public:
 	void bookings(const std::string name);
 	void bookings(const Date& date);
 	void tenPercent(const Date& from, const Date& to) const;
+	bool SortEvents();
 	bool isBooked2(int row, int seat, const Date& date, std::string name);
 	void run();
 
@@ -34,9 +36,5 @@ private:
 
 	std::vector<Event*> events;
 	
-	
-	
-	
-
 };
 
