@@ -109,19 +109,14 @@ bool System::check(std::string _ticketid)
 				if (events[i]->getTicketId(j, k) == _ticketid)
 				{
 					std::cout << "Ticket for event: " << events[i]->getName() <<
-						" on date " << events[i]->getDate() << " on row " << j + 1 << " seat " << k + 1;
+						" on date " << events[i]->getDate() << " on row " << j  << " seat " << k <<std::endl;
 					return true;
-				}
-				else
-				{
-					std::cout << "Invalid ID!"<<std::endl;
-					return false;
 				}
 			}
 		}
 	}
 	return false;
-	std::cout << "There is no ticket with that id!";
+	std::cout << "There is no ticket with that id!"<< std::endl;
 }
 
 void System::report(const Date& from, const Date& to, int Id)
@@ -233,7 +228,7 @@ bool System::isBooked2(int row, int seat, const Date& date, std::string name)
 	}
 	return false;
 }
-
+/*
 void System::run()
 {
 	std::vector<Hall> halls;
@@ -509,7 +504,7 @@ void System::run()
 		while (command != "exit");
 		//work._exit();
 	
-}
+} */
 
 
 

@@ -1,14 +1,17 @@
-addevent 13.12.2014 3 Koleda $
-addevent 11.10.2012 1 Zima $
-addevent 05.08.2011 5 Prolet $
-addevent 25.09.2010 2 Esen $           
-addevent 28.07.2020 1 Aladin $
-buy 3 3 13.12.2014 Koleda $
-buy 2 2 13.12.2014 Koleda $
-buy 5 1 13.12.2014 Koleda $
-buy 7 6 13.12.2014 Koleda $
-buy 3 5 05.08.2011 Prolet $
-book 5 6  28.07.2020 Aladin Ivan $
-book 3 1  28.07.2020 Aladin Petko $ 
-book 9 10  13.12.2014 Koleda Grisho $
+buy3 8 13.12.2014 Koleda  
+addevent 13.12.2010 5 Yordanovden 
+addevent 10.10.2010 5 Ivanovden 
+addevent 13.12.2014 3 Koleda 
+addevent 11.10.2012 1 Zima 
+addevent 05.08.2011 5 Prolet 
+addevent 25.09.2010 2 Esen            
+addevent 28.07.2020 1 Aladin 
+buy 3 3 13.12.2014 Koleda - 
+buy 2 2 13.12.2014 Koleda - 
+buy 5 1 13.12.2014 Koleda - 
+buy 7 6 13.12.2014 Koleda - 
+buy 3 5 05.08.2011 Prolet - 
+book 5 6  28.07.2020 Aladin Ivan 
+book 3 1  28.07.2020 Aladin Petko  
+book 9 10  13.12.2014 Koleda Grisho 
 book 11 3  05.08.2011 Prolet Georgi @

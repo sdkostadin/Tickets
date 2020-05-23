@@ -37,14 +37,14 @@ void Event::setName(std::string _name)
 
 void Event::setId(int row, int seat)
 {
-	ticketid[row - 1][seat - 1] = std::to_string(row) + std::to_string(seat) + std::to_string(hall.getId())
+	ticketid[row][seat] = std::to_string(row) + std::to_string(seat) + std::to_string(hall.getId())
 		 + std::to_string(date.getDay()) + std::to_string(date.getMonth()) + std::to_string(date.getYear());
 }
 
 
 void Event::setDate(Date _date)
 {
-	if (_date.validation(_date.getDay(), _date.getMonth(), _date.getYear()))
+	if (_date.validation())
 	{
 		date = _date;
 	}

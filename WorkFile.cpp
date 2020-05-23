@@ -5,6 +5,7 @@
 
 void WorkFile::_open(std::string path,System& s )
 {
+	fileName = path;
 	file.open(path);
 	if (file.is_open())
 	{
@@ -167,7 +168,7 @@ void WorkFile::filetoString(System& s)
 				{
 					date[i] = ' ';
 				}
-			}
+			} 
 			std::vector<int>numbers;
 			int number;
 			std::istringstream readNums(date);

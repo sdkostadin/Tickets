@@ -49,19 +49,25 @@ int main()
 			date.setDay(day);
 			date.setMonth(month);
 			date.setYear(year);
-			for (size_t i = 0; i < halls.size(); i++)
+			if (date.validation())
 			{
-				if (halls[i].getId() == id)
+				for (size_t i = 0; i < halls.size(); i++)
 				{
-					Event ev(date, halls[i], name);
-					s.createEvent({ ev });
-					std::cout << std::endl;
-					work.newInformation("addevent " + std::to_string(ev.getDate().getDay()) + '.' + std::to_string(ev.getDate().getMonth()) + '.' + std::to_string(ev.getDate().getYear()) +" "
-						+ std::to_string(halls[i].getId()) +" " + ev.getName()+ " $" + '\n');
+					if (halls[i].getId() == id)
+					{
+						Event ev(date, halls[i], name);
+						s.createEvent({ ev });
+						std::cout << std::endl;
+						work.newInformation("addevent " + std::to_string(ev.getDate().getDay()) + '.' + std::to_string(ev.getDate().getMonth()) + '.' + std::to_string(ev.getDate().getYear()) + " "
+							+ std::to_string(halls[i].getId()) + " " + ev.getName() + '\n');
 
+					}
 				}
 			}
-			
+			else
+			{
+				std::cout << "Invalid date input." << std::endl;
+			}
 		}
 		else if (command == "book")
 		{
@@ -83,10 +89,17 @@ int main()
 			date.setDay(day);
 			date.setMonth(month);
 			date.setYear(year);
-			s.book(row, seat, date, name, note);
-			std::cout << std::endl;
-			work.newInformation("buy " + std::to_string(row) + " " + std::to_string(seat)+" " + std::to_string(date.getDay()) + '.' + std::to_string(date.getMonth()) + '.' + std::to_string(date.getYear()) + " " +
-				 name + " $"+'\n');
+			if (date.validation())
+			{
+				s.book(row, seat, date, name, note);
+				std::cout << std::endl;
+				work.newInformation("book " + std::to_string(row) + " " + std::to_string(seat) + " " + std::to_string(date.getDay()) + '.' + std::to_string(date.getMonth()) + '.' + std::to_string(date.getYear()) + " " +
+					name  + '\n');
+			}
+			else
+			{
+				std::cout << "Invalid date input." << std::endl;
+			}
 		}
 
 		else if (command == "unbook")
@@ -107,8 +120,16 @@ int main()
 			date.setDay(day);
 			date.setMonth(month);
 			date.setYear(year);
-			s.unbook(row, seat, date, name);
-			std::cout << std::endl;
+			if (date.validation())
+			{
+				s.unbook(row, seat, date, name);
+				std::cout << std::endl;
+			}
+			else
+			{
+				std::cout << "Invalid date input." << std::endl;
+			}
+			
 
 		}
 		else if (command == "buy")
@@ -129,23 +150,30 @@ int main()
 			date.setDay(day);
 			date.setMonth(month);
 			date.setYear(year);
-			if (s.isBooked2(row, seat, date, name))
+			if (date.validation())
 			{
-				std::cin >> note;
-				s.buy(row, seat, date, name, note);
-				std::cout << std::endl;
-				work.newInformation("book" + std::to_string(row) + std::to_string(seat) + std::to_string(date.getDay()) + '.' + std::to_string(date.getMonth()) + '.' + std::to_string(date.getYear()) +
-					name + note + " $" + '\n');
+				if (s.isBooked2(row, seat, date, name))
+				{
+					std::cin >> note;
+					s.buy(row, seat, date, name, note);
+					std::cout << std::endl;
+					work.newInformation("buy " + std::to_string(row)+ " " + std::to_string(seat) + " " + std::to_string(date.getDay()) + '.' + std::to_string(date.getMonth()) + '.' + std::to_string(date.getYear()) +
+						" " +name + " " + note + '\n');
 
 
+				}
+				else
+				{
+					s.buy(row, seat, date, name, note);
+					work.newInformation("buy " + std::to_string(row) +" "+ std::to_string(seat) + " " + std::to_string(date.getDay()) + '.' + std::to_string(date.getMonth()) + '.' + std::to_string(date.getYear()) 
+						+" "+ name + " " + note + " "  + '\n');
+					std::cout << std::endl;
+
+				}
 			}
 			else
 			{
-				s.buy(row, seat, date, name, note);
-				work.newInformation("book" + std::to_string(row) + std::to_string(seat) + std::to_string(date.getDay()) + '.' + std::to_string(date.getMonth()) + '.' + std::to_string(date.getYear()) +
-					name + note + " $");
-				std::cout << std::endl;
-
+				std::cout << "Invalid date input." << std::endl;
 			}
 		}
 		else if (command == "bookings")
@@ -170,7 +198,14 @@ int main()
 				date.setDay(day);
 				date.setMonth(month);
 				date.setYear(year);
-				s.bookings(name, date);
+				if (date.validation())
+				{
+					s.bookings(name, date);
+				}
+				else
+				{
+					std::cout << "Invalid date input." << std::endl;
+				}
 			}
 			else if (d == 'Y' && n == 'N')
 			{
@@ -184,7 +219,14 @@ int main()
 				date.setDay(day);
 				date.setMonth(month);
 				date.setYear(year);
-				s.bookings(date);
+				if (date.validation())
+				{
+					s.bookings(date);
+				}
+				else
+				{
+					std::cout << "Invalid date input." << std::endl;
+				}
 			}
 			else if (d == 'N' && n == 'Y')
 			{
@@ -217,7 +259,14 @@ int main()
 			date.setDay(day);
 			date.setMonth(month);
 			date.setYear(year);
-			s.freeSeats(date, name);
+			if (date.validation())
+			{
+				s.freeSeats(date, name);
+			}
+			else
+			{
+				std::cout << "Invalid date input." << std::endl;
+			}
 		}
 		else if (command == "report")
 		{
@@ -248,9 +297,16 @@ int main()
 				to.setDay(day2);
 				to.setMonth(month2);
 				to.setYear(year2);
-				std::cout << "Add hall ID ";
-				std::cin >> ID;
-				s.report(from, to, ID);
+				if (from.validation() && to.validation())
+				{
+					std::cout << "Add hall ID ";
+					std::cin >> ID;
+					s.report(from, to, ID);
+				}
+				else
+				{
+					std::cout << "Invalid date input." << std::endl;
+				}
 			}
 			else
 			{
@@ -272,7 +328,14 @@ int main()
 				to.setDay(day2);
 				to.setMonth(month2);
 				to.setYear(year2);
-				s.report(from, to);
+				if (from.validation() && to.validation())
+				{
+					s.report(from, to);
+				}
+				else
+				{
+					std::cout << "Invalid date input." << std::endl;
+				}
 			}
 		}
 		else if (command == "underten")
@@ -298,7 +361,14 @@ int main()
 			to.setDay(day2);
 			to.setMonth(month2);
 			to.setYear(year2);
-			s.tenPercent(from, to);
+			if (from.validation() && to.validation())
+			{
+				s.tenPercent(from, to);
+			}
+			else
+			{
+				std::cout << "Invalid date input." << std::endl;
+			}
 		}
 		else if (command == "popular")
 		{

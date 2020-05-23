@@ -132,39 +132,39 @@ void Date::clear()
 
 }
 
-bool Date::validation(int day, int month, int year)
+bool Date::validation()
 {
 	int helper = 0;
-	if (!year)
+	if (!_year)
 	{
 		return false;
 	}
-	if (month < 1 || month > 12)
+	if (_month < 1 || _month > 12)
 	{
 		return false;
 	}
 	//Leap year is devisible by 4, 100, 400
 	bool leap = false;
-	if ((year % 400 == 0) &&
-		(year % 100 == 0) &&
-		(year % 4 == 0))
+	if ((_year % 400 == 0) &&
+		(_year % 100 == 0) &&
+		(_year % 4 == 0))
 	{
 		leap = true;
 	}
-	if (leap && month == 2)
+	if (leap && _month == 2)
 	{
 		helper = 29;
 	}
-	else if (month == 2 && !leap )
+	else if (_month == 2 && !leap )
 	{
 		helper = 28;
 	}
-	else if (month == 1 || month == 3 ||
-		month == 5 ||
-		month == 7 ||
-		month == 8 ||
-		month == 10 ||
-		month == 12)
+	else if (_month == 1 || _month == 3 ||
+		_month == 5 ||
+		_month == 7 ||
+		_month == 8 ||
+		_month == 10 ||
+		_month == 12)
 	{
 		helper = 31;
 	}
@@ -172,7 +172,7 @@ bool Date::validation(int day, int month, int year)
 	{
 		helper = 30;
 	}
-	if (day > helper || day < 0)
+	if (_day > helper || _day < 0)
 	{
 		return false;
 	}

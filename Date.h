@@ -18,7 +18,7 @@ public:
 	bool operator<=(const Date& other) const;
 	bool operator>=(const Date& other) const;
 	void print() const;
-	bool validation(int day, int month, int year);
+	bool validation();
 
 private:
 
