@@ -154,6 +154,7 @@ int main()
 			{
 				if (s.isBooked2(row, seat, date, name))
 				{
+					std::cout << "Add note: ";
 					std::cin >> note;
 					s.buy(row, seat, date, name, note);
 					std::cout << std::endl;

@@ -52,12 +52,12 @@ void Event::setDate(Date _date)
 
 bool Event::bookSeat(int row, int seat, std::string _note)
 {
-	if (seats[row - 1][seat - 1] == booked)
+	if (seats[row][seat] == booked)
 	{
 		std::cout << "Seat is aldready booked." << std::endl;
 		return false;
 	}
-	else if (seats[row - 1][seat - 1] == paid)
+	else if (seats[row ][seat ] == paid)
 	{
 		
 		std::cout << "Seat is already bought." << std::endl;
@@ -65,8 +65,8 @@ bool Event::bookSeat(int row, int seat, std::string _note)
 	}
 	else
 	{
-		seats[row - 1][seat - 1] = booked;
-		note[row - 1][seat - 1] = _note;
+		seats[row ][seat ] = booked;
+		note[row ][seat ] = _note;
 		setId(row, seat);
 		std::cout << "Seat booked succesfuly." << std::endl;
 		return true;
@@ -76,9 +76,9 @@ bool Event::bookSeat(int row, int seat, std::string _note)
 
 bool Event::unbookSeat(int row, int seat)
 {
-	if (seats[row - 1][seat - 1] == booked)
+	if (seats[row][seat] == booked)
 	{
-		seats[row - 1][seat - 1] = def;
+		seats[row][seat] = def;
 		freeSeats++;
 		std::cout << "Seat unbooked succesfuly." << std::endl;
 		return true;
@@ -92,7 +92,7 @@ bool Event::unbookSeat(int row, int seat)
 
 bool Event::isBooked(int row, int seat)
 {
-	if (seats[row - 1][seat - 1] == booked)
+	if (seats[row][seat] == booked)
 	{
 		return true;
 	}
@@ -104,9 +104,9 @@ bool Event::isBooked(int row, int seat)
 
 bool Event::buySeat(int row, int seat, std::string _note)
 {
-	if (seats[row - 1][seat - 1] == booked)
+	if (seats[row][seat] == booked)
 	{
-		if (note[row - 1][seat - 1] == _note)
+		if (note[row][seat] == _note)
 		{
 			freeSeats--;
 			soldSeats++;
@@ -119,7 +119,7 @@ bool Event::buySeat(int row, int seat, std::string _note)
 			return false;
 		}
 	}
-	else if (seats[row - 1][seat - 1] == paid)
+	else if (seats[row][seat] == paid)
 	{
 		std::cout << "Seat is already paid." << std::endl;
 		return false;
@@ -127,7 +127,7 @@ bool Event::buySeat(int row, int seat, std::string _note)
 	else
 	{
 		seats[row][seat] = paid;
-		note[row - 1][seat - 1] = _note;
+		note[row][seat] = _note;
 		freeSeats--;
 		soldSeats++;
 		setId(row, seat);
@@ -166,7 +166,7 @@ void Event::printBooked() const
 		{
 			if (seats[i][j] == booked)
 			{
-				std::cout << "Row " << i+1 << " seat " << j+1 << " is booked." << std::endl;
+				std::cout << "Row " << i << " seat " << j << " is booked." << std::endl;
 			}
 		}
 	}
@@ -180,7 +180,7 @@ void Event::printBought() const
 		{
 			if (seats[i][j] == paid)
 			{
-				std::cout << "Row " << i + 1 << " seat " << j + 1 << " is bought."<<std::endl;
+				std::cout << "Row " << i  << " seat " << j << " is bought."<<std::endl;
 			}
 		}
 	}

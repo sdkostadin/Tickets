@@ -5,7 +5,7 @@ public:
 	Hall(int _id = 0 , int _rows = 0, int _SeatsOnRow = 0);
 	Hall(const Hall& other);
 	Hall& operator=(const Hall& other);
-	bool operator==(const Hall& other)const;
+	//bool operator==(const Hall& other)const;
 
 	int getId() const { return id; }
 	int getRows() const { return rows; }

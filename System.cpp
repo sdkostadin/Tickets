@@ -194,7 +194,7 @@ void System::tenPercent(const Date& from, const Date& to) const
 			if (helper < 0.1 || events[i]->getSoldSeats()==0)
 			{
 				events[i]->print();
-				std::cout << "Bought tickets: " << events[i]->getSoldSeats()<<std::endl;
+				std::cout << "Bought tickets: " << events[i]->getSoldSeats()<< " from " << events[i]->getHall().getAllSeats() <<std::endl;
 			}
 		}
 	}
@@ -207,7 +207,7 @@ bool System::SortEvents()
 	for (size_t i = 0; i < events.size(); i++)
 	{
 		events[i]->print();
-		std::cout << events[i]->getSoldSeats() << " bought  tickets " << std::endl;
+		std::cout << events[i]->getSoldSeats() << " bought  tickets, from " << events[i]->getHall().getAllSeats() <<std::endl;
 	}
 	return true;
 }

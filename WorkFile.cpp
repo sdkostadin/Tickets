@@ -50,14 +50,22 @@ void WorkFile::_saveas(std::string place)
 void WorkFile::_help()
 {
 	std::cout
-		<< "The following commands are supported: "<<std::endl
+		<< "The following commands are supported: " << std::endl
 		<< "open <file>	opens <file>" << std::endl
 		<< "close			closes currently opened file" << std::endl
 		<< "save			saves the currently open file" << std::endl
 		<< "saveas <file>	saves the currently open file in <file>" << std::endl
 		<< "help			prints this information" << std::endl
-		<< "exit			exists the program" << std::endl;
-		
+		<< "exit			exists the program" << std::endl
+		<< " " << std::endl
+		<< "addevent <date> <hallId> <name>                  adds new event " << std::endl
+		<< "freeseats <date> <name>                          shows freeseats on chosen event " << std::endl
+		<< "book <row> <seat> <date> <name> <note>           books a seat for event " << std::endl
+		<< "unbook <row> <seat> <date> <name>                unbooks a seat for event" << std::endl
+		<< "buy <row> <seat> <date> <name>                   buys a ticket for event " << std::endl
+		<< "bookings [<date>] [<name>]                       shows booked seats for event " << std::endl
+		<< "check <ID>                                       checks if there is a ticket with that ID" << std::endl
+		<< "report <from> <to> [<hallID>]                    shows bought seats in period " << std::endl;
 }
 
 void WorkFile::_exit()

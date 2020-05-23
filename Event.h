@@ -28,12 +28,13 @@ public:
 	int getSeatsOnRow() const { return hall.getSeatsOnRow(); }
 	int getFreeSeats() const { return freeSeats; }
 	int getSoldSeats() const { return soldSeats; }
-	status getSeatStatus(int row, int seat) const { return seats[row-1][seat-1]; }
+	status getSeatStatus(int row, int seat) const { return seats[row][seat]; }
 	std::string getTicketId(int row, int seat) const { return ticketid[row][seat]; }
-	std::string getNote(int row, int seat) const { return note[row - 1][seat - 1]; }
+	std::string getNote(int row, int seat) const { return note[row][seat]; }
 	void setName(std::string _name);
 	void setId(int row, int seat);
 	void setDate(Date _date);
+	void setHall(Hall id);
 	bool bookSeat(int row, int seat, std::string _note);
 	void setFreeSeats(int _freeseats) { freeSeats = _freeseats; };
 	void setSoldSeats(int _soldseats) {soldSeats = _soldseats;}
@@ -45,7 +46,7 @@ public:
 	void printBooked() const;
 	void printBought() const;
 	void init(); 
-	void setHall(Hall id);
+	
 
 private:
 
