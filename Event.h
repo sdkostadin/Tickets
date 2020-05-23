@@ -35,6 +35,8 @@ public:
 	void setId(int row, int seat);
 	void setDate(Date _date);
 	bool bookSeat(int row, int seat, std::string _note);
+	void setFreeSeats(int _freeseats) { freeSeats = _freeseats; };
+	void setSoldSeats(int _soldseats) {soldSeats = _soldseats;}
 	bool unbookSeat(int row, int seat);
 	bool isBooked(int row, int seat);
 	bool buySeat(int row, int seat, std::string _note);
@@ -42,6 +44,8 @@ public:
 	void printFree() const;
 	void printBooked() const;
 	void printBought() const;
+	void init(); 
+	void setHall(Hall id);
 
 private:
 

@@ -19,10 +19,13 @@ public:
 	void _help();
 	void _exit();
 	void filetoString(System& s);
+	void writeInFile(std::string path);
+	void newInformation(std::string info);
 private:
 
 	std::fstream file;
 	std::string fileName;
+	std::string newWritings;
 	std::string content;
 	
 };

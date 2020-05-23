@@ -4,7 +4,7 @@
 #include <sstream>
 #include <algorithm>
 #include "Event.h"
-#include "WorkFile.h"
+
  
 class System
 {

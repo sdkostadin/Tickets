@@ -22,7 +22,7 @@ bool System::createEvent(const Event& event)
 	if (getEvent(event.getName()) == nullptr) 
 	{
 		events.push_back(new Event(event));
-		std::cout << "Successfully added event";
+		std::cout << "Successfully added event" << std::endl;
 		return true;
 	}
 
@@ -114,7 +114,7 @@ bool System::check(std::string _ticketid)
 				}
 				else
 				{
-					std::cout << "Invalid ID!";
+					std::cout << "Invalid ID!"<<std::endl;
 					return false;
 				}
 			}
@@ -214,6 +214,7 @@ bool System::SortEvents()
 		events[i]->print();
 		std::cout << events[i]->getSoldSeats() << " bought  tickets " << std::endl;
 	}
+	return true;
 }
 
 
@@ -252,7 +253,7 @@ void System::run()
 	int day, month, year;
 	int row, seat;
 	std::string command;
-	WorkFile work;
+
 
 	do
 	{
@@ -501,12 +502,12 @@ void System::run()
 		}
 		else if (command == "help")
 		{
-		 work._help();
+		// work._help();
 		}
 	
 	}
 		while (command != "exit");
-		work._exit();
+		//work._exit();
 	
 }
 
