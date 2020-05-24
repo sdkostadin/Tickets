@@ -91,7 +91,6 @@ bool System::buy(int row, int seat, const Date& date, std::string name, std::str
 		if (events[i]->getDate() == date && events[i]->getName() == name)
 		{
 			events[i]->buySeat(row, seat, note);
-			std::cout << "Seat bought." << std::endl;
 			return true;
 		}
 	}

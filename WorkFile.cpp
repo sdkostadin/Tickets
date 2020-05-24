@@ -25,6 +25,7 @@ void WorkFile::_close()
 	if (file.is_open())
 	{
 		file.close();
+		fileName.clear();
 		std::cout << "Succesfully closed " << fileName << std::endl;
 	}
 	else

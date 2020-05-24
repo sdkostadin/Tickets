@@ -52,6 +52,11 @@ void Event::setDate(Date _date)
 
 bool Event::bookSeat(int row, int seat, std::string _note)
 {
+	if (row > hall.getRows() || row <= 0 || seat > hall.getSeatsOnRow() || seat<=0)
+	{
+		std::cout << "Wrong row or seat imput!" << std::endl;
+		return false;
+	}
 	if (seats[row][seat] == booked)
 	{
 		std::cout << "Seat is aldready booked." << std::endl;
@@ -76,6 +81,11 @@ bool Event::bookSeat(int row, int seat, std::string _note)
 
 bool Event::unbookSeat(int row, int seat)
 {
+	if (row > hall.getRows() || row <= 0 || seat > hall.getSeatsOnRow() || seat <= 0)
+	{
+		std::cout << "Wrong row or seat imput!" << std::endl;
+		return false;
+	}
 	if (seats[row][seat] == booked)
 	{
 		seats[row][seat] = def;
@@ -92,6 +102,10 @@ bool Event::unbookSeat(int row, int seat)
 
 bool Event::isBooked(int row, int seat)
 {
+	if (row > hall.getRows() || row <= 0 || seat > hall.getSeatsOnRow() || seat <= 0)
+	{
+		return false;
+	}
 	if (seats[row][seat] == booked)
 	{
 		return true;
@@ -104,6 +118,11 @@ bool Event::isBooked(int row, int seat)
 
 bool Event::buySeat(int row, int seat, std::string _note)
 {
+	if (row > hall.getRows() || row <= 0 || seat > hall.getSeatsOnRow() || seat <= 0)
+	{
+		std::cout << "Wrong row or seat imput!" << std::endl;
+		return false;
+	}
 	if (seats[row][seat] == booked)
 	{
 		if (note[row][seat] == _note)
@@ -111,6 +130,7 @@ bool Event::buySeat(int row, int seat, std::string _note)
 			freeSeats--;
 			soldSeats++;
 			seats[row][seat] = paid;
+			std::cout << "Seat bought successfully!" << std::endl;
 			return true;
 		}
 		else
@@ -131,6 +151,7 @@ bool Event::buySeat(int row, int seat, std::string _note)
 		freeSeats--;
 		soldSeats++;
 		setId(row, seat);
+		std::cout << "Seat bought successfully!" << std::endl;
 		return true;
 	}
 	
