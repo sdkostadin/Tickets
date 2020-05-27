@@ -1,3 +1,6 @@
+#ifndef SYS_H
+#define SYS_H
+
 #pragma once
 #include <vector>
 #include <iostream>
@@ -29,7 +32,7 @@ public:
 	void tenPercent(const Date& from, const Date& to) const;
 	bool SortEvents();
 	bool isBooked2(int row, int seat, const Date& date, std::string name);
-	void run();
+
 
 
 private:
@@ -38,3 +41,4 @@ private:
 	
 };
 
+#endif

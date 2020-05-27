@@ -159,7 +159,7 @@ bool Date::validation()
 	{
 		helper = 28;
 	}
-	else if (_month == 1 || _month == 3 ||
+	if (_month == 1 || _month == 3 ||
 		_month == 5 ||
 		_month == 7 ||
 		_month == 8 ||

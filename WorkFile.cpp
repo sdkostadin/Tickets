@@ -58,7 +58,7 @@ void WorkFile::_help()
 		<< "saveas <file>	saves the currently open file in <file>" << std::endl
 		<< "help			prints this information" << std::endl
 		<< "exit			exists the program" << std::endl
-		<< " " << std::endl
+		<< std::endl
 		<< "addevent <date> <hallId> <name>                  adds new event " << std::endl
 		<< "freeseats <date> <name>                          shows freeseats on chosen event " << std::endl
 		<< "book <row> <seat> <date> <name> <note>           books a seat for event " << std::endl

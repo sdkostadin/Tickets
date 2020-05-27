@@ -1,3 +1,5 @@
+#ifndef DATE_H
+#define DATE_H
 #pragma once
 class Date
 {
@@ -32,3 +34,5 @@ private:
 };
 
 std::ostream& operator<<(std::ostream& out, const Date& obj);
+
+#endif

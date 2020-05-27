@@ -23,11 +23,6 @@ Hall& Hall::operator=(const Hall& other)
 	return *this;
 }
 
-//bool Hall::operator==(const Hall& other) const
-//{
-	//return this->id == other.id && this->rows == other.rows && this->SeatsOnRow == other.SeatsOnRow;
-//}
-
 void Hall::copy(const Hall& other)
 {
 	this->id = other.id;

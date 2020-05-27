@@ -1,3 +1,6 @@
+#ifndef WORK_H
+#define WORK_H
+
 #pragma once
 #include <iostream>
 #include <fstream>
@@ -30,3 +33,4 @@ private:
 	
 };
 
+#endif

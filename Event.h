@@ -1,3 +1,6 @@
+#ifndef EVENT_H
+#define EVENT_H
+
 #pragma once
 #include <vector>
 #include <string>
@@ -64,3 +67,4 @@ private:
 	void clear();
 };
 
+#endif
