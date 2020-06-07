@@ -36,8 +36,15 @@ void WorkFile::_close()
 
 void WorkFile::_save()
 {
-	writeInFile(fileName);
-	std::cout << "Changes are made successfully!" << std::endl;
+	if (file.is_open())
+	{
+		writeInFile(fileName);
+		std::cout << "Changes are made successfully!" << std::endl;
+	}
+	else
+	{
+		std::cout << "File not opened!" << std::endl;
+	}
 }
 
 void WorkFile::_saveas(std::string place)
@@ -51,13 +58,14 @@ void WorkFile::_saveas(std::string place)
 void WorkFile::_help()
 {
 	std::cout
-		<< "The following commands are supported: " << std::endl
-		<< "open <file>	opens <file>" << std::endl
-		<< "close			closes currently opened file" << std::endl
-		<< "save			saves the currently open file" << std::endl
-		<< "saveas <file>	saves the currently open file in <file>" << std::endl
-		<< "help			prints this information" << std::endl
-		<< "exit			exists the program" << std::endl
+		<< "                                The following commands are supported: " << std::endl
+		<< std::endl
+		<< "open <file>	                                 opens <file>" << std::endl
+		<< "close			                         closes currently opened file" << std::endl
+		<< "save		                                 saves the currently open file" << std::endl
+		<< "saveas <file>	                                 saves the currently open file in <file>" << std::endl
+		<< "help			                         prints this information" << std::endl
+		<< "exit			                         exists the program" << std::endl
 		<< std::endl
 		<< "addevent <date> <hallId> <name>                  adds new event " << std::endl
 		<< "freeseats <date> <name>                          shows freeseats on chosen event " << std::endl
@@ -66,7 +74,9 @@ void WorkFile::_help()
 		<< "buy <row> <seat> <date> <name>                   buys a ticket for event " << std::endl
 		<< "bookings [<date>] [<name>]                       shows booked seats for event " << std::endl
 		<< "check <ID>                                       checks if there is a ticket with that ID" << std::endl
-		<< "report <from> <to> [<hallID>]                    shows bought seats in period " << std::endl;
+		<< "report <from> <to> [<hallID>]                    shows bought seats in period " << std::endl
+		<< "underten <from> <to>                             shows events with under 10 percent bought or booked tickets" <<std::endl
+		<< "popular                                          prints events sorted by their sold tickets" << std::endl;
 }
 
 void WorkFile::_exit()
@@ -86,12 +96,12 @@ void WorkFile::filetoString(System& s)
 	std::string word;
 	Event currEvent;
 	std::vector<Hall> halls;
-	Hall hall1(1, 50, 20);
-	Hall hall2(2, 20, 10);
-	Hall hall3(3, 70, 15);
-	Hall hall4(4, 80, 20);
-	Hall hall5(5, 100, 20);
-	Hall hall6(6, 60, 30);
+	Hall hall1(1, 51, 21);
+	Hall hall2(2, 21, 10);
+	Hall hall3(3, 71, 16);
+	Hall hall4(4, 81, 21);
+	Hall hall5(5, 121, 21);
+	Hall hall6(6, 61, 31);
 	halls.push_back(hall1);
 	halls.push_back(hall2);
 	halls.push_back(hall3);

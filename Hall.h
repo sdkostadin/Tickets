@@ -12,7 +12,7 @@ public:
 	int getId() const { return id; }
 	int getRows() const { return rows; }
 	int getSeatsOnRow() const { return SeatsOnRow ; }
-	int getAllSeats() const { return rows * SeatsOnRow; }
+	int getAllSeats() const { return rows * SeatsOnRow - rows - SeatsOnRow + 1; }
 	
 	void setId(int _id) { id = _id; };
 	

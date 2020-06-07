@@ -22,7 +22,7 @@ bool System::createEvent(const Event& event)
 	if (getEvent(event.getName()) == nullptr) 
 	{
 		events.push_back(new Event(event));
-		std::cout << "Successfully added event" << std::endl;
+		std::cout << "Successfully added event!" << std::endl;
 		return true;
 	}
 
@@ -114,8 +114,9 @@ bool System::check(std::string _ticketid)
 			}
 		}
 	}
+	std::cout << "There is no ticket with that id!" << std::endl;
 	return false;
-	std::cout << "There is no ticket with that id!"<< std::endl;
+	
 }
 
 void System::report(const Date& from, const Date& to, int Id)
@@ -185,17 +186,23 @@ void System::bookings(const Date& date)
 
 void System::tenPercent(const Date& from, const Date& to) const
 {
+	bool flag = false;
 	for (size_t i = 0; i < events.size(); i++)
 	{
 		if (events[i]->getDate() >= from && events[i]->getDate() <= to)
 		{
-			double helper = events[i]->getSoldSeats()/ events[i]->getHall().getAllSeats() ;
-			if (helper < 0.1 || events[i]->getSoldSeats()==0)
+			
+			if (events[i]->getSoldSeats() <= events[i]->getHall().getAllSeats()*0.1)
 			{
+				flag = true;
 				events[i]->print();
 				std::cout << "Bought tickets: " << events[i]->getSoldSeats()<< " from " << events[i]->getHall().getAllSeats() <<std::endl;
 			}
 		}
+	}
+	if (!flag)
+	{
+		std::cout<<"There's no events with under 10 percent bought tickets!"<<std::endl;
 	}
 }
 
@@ -212,8 +219,7 @@ bool System::SortEvents()
 }
 
 
-
-bool System::isBooked2(int row, int seat, const Date& date, std::string name)
+bool System::isBooked(int row, int seat, const Date& date, std::string name)
 {
 	for (size_t i = 0; i < events.size(); i++)
 	{

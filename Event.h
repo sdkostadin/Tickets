@@ -21,7 +21,6 @@ class Event
 public:
 	Event(Date _date = {}, Hall _hall = {}, std::string _name = "untitled");
 	Event& operator=(const Event& other);
-	~Event();
 
 	
 	Date getDate() const { return date; }

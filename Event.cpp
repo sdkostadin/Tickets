@@ -26,10 +26,6 @@ Event& Event::operator=(const Event& other)
 	return *this;
 }
 
-Event::~Event()
-{
-}
-
 void Event::setName(std::string _name)
 {
 	name = _name;
@@ -72,6 +68,7 @@ bool Event::bookSeat(int row, int seat, std::string _note)
 	{
 		seats[row ][seat ] = booked;
 		note[row ][seat ] = _note;
+		freeSeats--;
 		setId(row, seat);
 		std::cout << "Seat booked succesfuly." << std::endl;
 		return true;
@@ -166,16 +163,31 @@ void Event::print() const
 
 void Event::printFree() const
 {
-	for (int i = 0; i < hall.getRows(); i++)
+	for (int i = 1; i < hall.getRows(); i++)
 	{
-		for (int j = 0; j < hall.getSeatsOnRow(); j++)
+		for (int j = 1; j < hall.getSeatsOnRow(); j++)
 		{
 			if (seats[i][j] !=booked && seats[i][j]!=paid)
 			{
-				std::cout << "Row " << i << " seat " << j << " is free." << std::endl;
+				//std::cout << "Row " << i << " seat " << j << " is free." << std::endl;
+				std::cout << j << "  ";
+			}
+			else if(!(seats[i][j] != booked && seats[i][j] != paid)&& j<10)
+			{
+				std::cout << "X  ";
+			}
+			else if (!(seats[i][j] != booked && seats[i][j] != paid) && j > 100)
+			{
+				std::cout << "X  ";
+			}
+			else
+			{
+				std::cout << "XX  ";
 			}
 			
 		}
+		
+		std::cout<<"Row: "<<i<<std::endl;
 	}
 }
 
@@ -279,9 +291,4 @@ void Event::clear()
 {
 
 }
-
-
-
-
-
 

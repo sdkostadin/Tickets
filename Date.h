@@ -7,7 +7,7 @@ public:
 	Date();
 	Date(int day, int month, int year);
 	Date& operator=(const Date& other);
-	~Date();
+
 	int getDay() const { return _day; }
 	int getMonth() const { return _month; }
 	int getYear() const { return _year; }
@@ -25,7 +25,7 @@ public:
 private:
 
 	void copy(const Date& other);
-	void clear();
+	
 	
 
 	int _day;

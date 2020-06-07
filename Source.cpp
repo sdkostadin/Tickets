@@ -9,12 +9,12 @@ int main()
 {
 	System s;
 	std::vector<Hall> halls;
-	Hall hall1(1, 50, 20);
-	Hall hall2(2, 20, 10);
-	Hall hall3(3, 70, 15);
-	Hall hall4(4, 80, 20);
-	Hall hall5(5, 100, 20);
-	Hall hall6(6, 60, 30);
+	Hall hall1(1, 51, 21);
+	Hall hall2(2, 21, 10);
+	Hall hall3(3, 71, 16);
+	Hall hall4(4, 81, 21);
+	Hall hall5(5, 121, 21);
+	Hall hall6(6, 61, 31);
 	halls.push_back(hall1);
 	halls.push_back(hall2);
 	halls.push_back(hall3);
@@ -26,7 +26,7 @@ int main()
 	int row, seat;
 	std::string command;
 	WorkFile work;
-
+	std::cout << "Type help for options." << std::endl;
 	do
 	{
 		std::cout << ">>";
@@ -152,7 +152,7 @@ int main()
 			date.setYear(year);
 			if (date.validation())
 			{
-				if (s.isBooked2(row, seat, date, name))
+				if (s.isBooked(row, seat, date, name))
 				{
 					std::cout << "Add note: ";
 					std::cin >> note;

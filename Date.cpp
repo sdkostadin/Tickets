@@ -20,17 +20,13 @@ Date& Date::operator=(const Date& other)
 {
 	// TODO: insert return statement here
 	if (this != &other) {
-		clear();
+
 		copy(other);
 	}
 	return *this;
 }
 
 
-Date::~Date()
-{
-	clear();
-}
 
 void Date::setDay(int day)
 {
@@ -124,13 +120,6 @@ void Date::copy(const Date& other)
 	this->_year = other._year;
 }
 
-void Date::clear()
-{
-	_day = 0;
-	_month = 0;
-	_year = 0;
-
-}
 
 bool Date::validation()
 {
@@ -159,7 +148,8 @@ bool Date::validation()
 	{
 		helper = 28;
 	}
-	if (_month == 1 || _month == 3 ||
+	if (_month == 1 || 
+		_month == 3 ||
 		_month == 5 ||
 		_month == 7 ||
 		_month == 8 ||
@@ -168,11 +158,14 @@ bool Date::validation()
 	{
 		helper = 31;
 	}
-	else
+	else if(_month == 4|| 
+		_month == 6 || 
+		_month == 9 || 
+		_month == 11 )
 	{
 		helper = 30;
 	}
-	if (_day > helper || _day < 0)
+	if (_day > helper || _day <= 0)
 	{
 		return false;
 	}
